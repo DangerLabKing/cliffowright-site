@@ -4,7 +4,8 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="wrap footer-inner">
-        <img src="/spiral.png" alt="" className="footer-spiral" width="273" height="323" />
+        {/* the orange "o" from the logo, on a paper tile so it reads on the black footer */}
+        <img src="/o-mark-tile.png" alt="" className="footer-spiral" width="249" height="318" />
         <div>
           <p className="footer-line">Art, code and ideas from West Orange, NJ.</p>
           <nav className="footer-links">

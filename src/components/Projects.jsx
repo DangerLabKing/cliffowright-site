@@ -98,9 +98,17 @@ export default function Projects() {
           Enterprise systems from my day job, products people use, things on the bench, and the
           older work that led here. Open any row for the details.
         </p>
-        {projectGroups.map((g) => (
+        {projectGroups.map((g, i) => (
           <div key={g.id} className="group">
-            <h3 className="group-title">{g.title}</h3>
+            {/* Group header: outlined number, big orange title, project count.
+                Styles: .group-head / .group-num / .group-title / .group-count in styles.css */}
+            <div className="group-head">
+              <span className="group-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3 className="group-title">{g.title}</h3>
+              <span className="group-count">
+                {g.projects.length} {g.projects.length === 1 ? 'project' : 'projects'}
+              </span>
+            </div>
             <p className="group-blurb">{g.blurb}</p>
             <div className="rows">
               {g.projects.map((p) => <ProjectRow key={p.id} p={p} />)}

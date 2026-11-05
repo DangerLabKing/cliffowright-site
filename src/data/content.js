@@ -1,10 +1,16 @@
-// Site copy, Now list, Art, Blog and Useful Stuff.
+// Site copy, Now list, Blog, Tech News and Useful Stuff.
+// (The art gallery lives in its own file: src/data/art.js)
 // Items marked TODO need your real content.
 
 export const site = {
   name: 'Cliff Wright',
-  intro:
-    'I’m Cliff, an artist, technologist and builder in West Orange, New Jersey. For 30+ years I’ve built and kept running the enterprise systems a major public transit agency depends on every day. The rest of my time goes to classroom tools teachers actually use, a rail-yard game, a home lab that writes my morning news, and drawings that start in a sketchbook.',
+  // Bio shown in the hero, one string per paragraph.
+  // The FIRST paragraph is shown large; the rest in normal-size text.
+  bio: [
+    'I’m Cliff Wright, a Jamaican-born software developer, artist, and tinkerer. For more than 30 years, I’ve built and maintained software for a major regional transit agency, the tools behind the people who keep the trains running.',
+    'On my own time, I build things I’d want to use myself. LiveGlossaryPro is a free tool that turns any vocabulary list into flashcards, quizzes, and puzzles. I’m also building Consist Commander, a rail-yard game, and my home lab puts together a morning news digest, transit alerts included, for my commute.',
+    'Lately I’ve been more deliberate about how I build with AI. I write down what the code needs to do, use AI to help me work through the problem, then review and test every change myself. When I draw, I move between pencil and paper and digital tools like Procreate and Sketchbook.',
+  ],
   links: [
     { label: 'Instagram', href: 'https://instagram.com/draw_wright_ai' },
     { label: 'LiveGlossaryPro', href: 'https://liveglossarypro.com' },
@@ -14,85 +20,108 @@ export const site = {
   ],
 };
 
-// "Now" — what's on the bench this month. Update whenever it changes.
+// "Now" — what's on the bench this month, shown as a terminal-style box.
+// Items appear in the order listed. Update whenever it changes.
+//   project – name shown in amber
+//   state   – short tag in brackets: 'live', 'dev', 'beta'... (any word works)
+//   text    – one line on what's happening
 export const now = {
   updated: 'November 2026',
   items: [
-    { project: 'MyVoice', text: 'making audio recording reliable on Safari and iOS for the pilot families.' },
-    { project: 'Consist Commander', text: 'rules engine is passing 68 tests; starting on gameplay.' },
-    { project: 'LiveGlossaryPro', text: 'adding MathJax so math vocabulary prints properly.' },
-    { project: 'cliffowright.com', text: 'you’re looking at it.' },
+    { project: 'LiveGlossaryPro', state: 'live', text: 'adding MathJax so math vocabulary prints properly.' },
+    { project: 'MyVoice', state: 'dev', text: 'making audio recording reliable on Safari and iOS for the pilot families.' },
+    { project: 'cliffowright.com', state: 'live', text: 'you’re looking at it.' },
+    { project: 'Consist Commander', state: 'dev', text: 'rules engine is passing 68 tests; starting on gameplay.' },
   ],
 };
 
-// "Where it started" block in the hero. Signatures are scribbled out in the image.
+// School ID shown next to the Now box in the hero (no heading or caption).
+// Signatures are scribbled out in the image. `alt` is read aloud by screen readers.
 export const origin = {
   png: '/about/school-id.png',
   webp: '/about/school-id.webp',
   alt: 'Cliff Wright’s student ID card from Cornwall College, 1987, with both signatures scribbled out in orange pencil',
-  caption: 'My student ID from Cornwall College, 1987.', // TODO: add a line in your own words
 };
 
-// Art: 9 slots. Drop images into /public/art/ and set `src`.
-// Desktop layout is set by grid-template-areas in styles.css (keyed by id).
-// size only affects phones: 'wide' tiles span both columns.
-export const art = [
-  { id: 'comics', title: 'Comics', caption: 'instaSpace panels', src: '', size: 'wide' },
-  { id: 'people', title: 'People Art', caption: 'Portraits and figures', src: '' },
-  { id: 'logos', title: 'Logos', caption: 'Marks and identities', src: '' },
-  { id: 'flyers', title: 'Flyers', caption: 'Events and small businesses', src: '' },
-  { id: 'characters', title: 'Characters', caption: 'Original designs', src: '' },
-  { id: 'sketches', title: 'Sketches', caption: 'Where it all starts', src: '' },
-  { id: 'promos', title: 'Product Promos', caption: 'Graphics for my classroom bundles', src: '' },
-  { id: 'digital', title: 'Digital Paintings', caption: 'Finished AI-assisted pieces', src: '', size: 'wide' },
-  { id: 'social', title: 'Social Posts', caption: 'Carousels and short visuals', src: '', size: 'wide' },
-];
-
-// Blog: planned posts carried over from the old site.
-// A post shows "Coming soon" until you give it an href; then the title becomes a link.
-// When you publish one, also change `date` to the real publish date.
+// Blog posts, newest first. A post shows "Coming soon" until it has an `href`.
+//
+// TO PUBLISH A POST ON THIS SITE:
+//   1. Save the text as src/posts/<slug>.md  (Markdown; start with "# Title")
+//   2. Put its images in public/blog/<slug>/ and refer to them in the Markdown
+//      as  assets/<file>.png  (they're rewritten to the right place automatically)
+//   3. Add an entry below with that slug and  href: '/blog/<slug>'
+// For a post hosted elsewhere (Medium, LinkedIn...), leave out `slug` and set
+// href to the full https:// address; it then opens in a new tab.
 export const posts = [
   {
-    title: 'Vibe Coding Is Real, but It Still Needs an Engineer',
-    tags: ['Vibe coding'],
-    minutes: 7,
-    summary: 'AI can write the first draft of your app in an afternoon. Here is what it takes to get that draft into production without regrets.',
-    date: '',
-    href: '',
-  },
-  {
-    title: 'Migrating a 20-Year-Old System Without Breaking Production',
-    tags: ['Legacy modernization'],
-    minutes: 11,
-    summary: 'Lessons from modernizing systems that thousands of people rely on every day, and why big-bang rewrites almost never work.',
-    date: '',
-    href: '',
-  },
-  {
-    title: 'How a SourceForge Project I Built in 2008 Became a Live Product',
-    tags: ['Open source'],
-    minutes: 8,
-    summary: 'The story of Live Glossary: from a GPL side project to liveglossarypro.com, and what open source taught me along the way.',
-    date: '',
-    href: '',
-  },
-  {
-    title: 'My Daily AI News Digest Runs on a Home Server',
-    tags: ['Self-hosting'],
-    minutes: 9,
-    summary: 'FreshRSS + n8n + a local Ollama model: a private, subscription-free news briefing, and how you can build one.',
-    date: '',
-    href: '',
-  },
-  {
-    title: 'Sketch First, Then AI: My Art Workflow',
-    tags: ['Art & process'],
+    // Lives on this site: text in src/posts/daily-ai-news-email.md,
+    // images in public/blog/daily-ai-news-email/
+    slug: 'daily-ai-news-email',
+    title: 'How I Built a Daily AI News Email with FreshRSS, n8n and a Local LLM',
+    tags: ['Home lab', 'Automation', 'Local AI'],
     minutes: 6,
-    summary: 'Where the human hand ends and the AI tools begin in my Draw Wright AI work.',
-    date: '',
-    href: '',
+    summary:
+      'Every morning my home server reads my RSS feeds, has a local language model summarize what matters, and emails me a briefing, transit alerts included. Here’s how the FreshRSS + n8n + local LLM pipeline fits together.',
+    date: 'Nov 2026',
+    href: '/blog/daily-ai-news-email',
   },
 ];
+
+// Tech News: four topics, each a short list of sources that update themselves,
+// so this section stays current without redeploying the site.
+//   label – link text      href – where it goes      note – one short line
+// To add a source, copy a { label, href, note } line inside the right topic.
+// To add a topic, copy a whole { id, title, blurb, links } block (and give it a new id).
+export const news = {
+  updated: 'November 2026',
+  topics: [
+    {
+      id: 'ai',
+      title: 'AI breakthroughs',
+      blurb: 'New models and research, straight from the labs and the people who cover them.',
+      links: [
+        { label: 'Google DeepMind Blog', href: 'https://deepmind.google/discover/blog/', note: 'Research from Google’s AI lab' },
+        { label: 'OpenAI News', href: 'https://openai.com/news/', note: 'Model releases and research' },
+        { label: 'Anthropic News', href: 'https://www.anthropic.com/news', note: 'Model releases and research' },
+        { label: 'MIT Technology Review: AI', href: 'https://www.technologyreview.com/topic/artificial-intelligence/', note: 'Reporting and analysis' },
+      ],
+    },
+    {
+      id: 'vibe',
+      title: 'Vibe coding',
+      blurb: 'Building software with AI, and doing it responsibly.',
+      links: [
+        { label: 'Simon Willison: vibe coding', href: 'https://simonwillison.net/tags/vibe-coding/', note: 'Hands-on notes from a working engineer' },
+        { label: 'GitHub Blog: AI & ML', href: 'https://github.blog/ai-and-ml/', note: 'AI coding tools and workflows' },
+        { label: 'The Pragmatic Engineer', href: 'https://newsletter.pragmaticengineer.com/', note: 'How real teams use AI in practice' },
+        { label: 'Hacker News', href: 'https://news.ycombinator.com/', note: 'What developers are talking about today' },
+      ],
+    },
+    {
+      id: 'drawing',
+      title: 'Digital drawing',
+      blurb: 'Tools, techniques and inspiration for drawing on screen.',
+      links: [
+        { label: 'Creative Bloq: Digital art', href: 'https://www.creativebloq.com/art/digital-art', note: 'News, tutorials and reviews' },
+        { label: 'Creative Bloq: Procreate', href: 'https://www.creativebloq.com/tag/procreate', note: 'Everything Procreate' },
+        { label: 'Sketchbook Blog', href: 'https://www.sketchbook.com/blog', note: 'Tips and updates from the Sketchbook team' },
+        { label: 'r/DigitalPainting', href: 'https://www.reddit.com/r/DigitalPainting/', note: 'Community work and critique' },
+      ],
+    },
+    {
+      id: 'homelab',
+      title: 'Home lab',
+      blurb: 'Self-hosting, servers and automation at home.',
+      links: [
+        { label: 'Techno Tim', href: 'https://technotim.com/', note: 'Home lab guides and videos' },
+        { label: 'Self-Host Weekly', href: 'https://selfh.st/tag/weekly/', note: 'Weekly roundup of self-hosted software' },
+        { label: 'Unraid Blog', href: 'https://unraid.net/blog', note: 'News from the OS on my server' },
+        { label: 'r/homelab', href: 'https://www.reddit.com/r/homelab/', note: 'Builds, racks and questions' },
+        { label: 'ServeTheHome', href: 'https://www.servethehome.com/', note: 'Server and networking hardware reviews' },
+      ],
+    },
+  ],
+};
 
 // Useful Stuff: carried over from the old site, grouped by category.
 // AFFILIATE LINKS: once you join a program, swap `href` for your referral link

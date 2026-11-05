@@ -23,6 +23,13 @@
   from = "/blog"
   to = "/#blog"
   status = 301
+# Blog post pages (e.g. /blog/daily-ai-news-email) are drawn by the React app,
+# so serve index.html for them. status 200 = "show this page", not a redirect.
+# Must come AFTER the "/blog" rule above so plain /blog still jumps to the section.
+[[redirects]]
+  from = "/blog/*"
+  to = "/index.html"
+  status = 200
 [[redirects]]
   from = "/useful-stuff"
   to = "/#useful"

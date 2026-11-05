@@ -16,17 +16,20 @@ npm run build      # outputs to dist/
 | What | File |
 |---|---|
 | Work rows (grouped, expandable) | `src/data/projects.js` |
-| Intro, Now list, Art tiles, Blog posts, Useful Stuff, services, contact topics, links | `src/data/content.js` |
+| Bio, Now list, Blog posts, Tech News links, Useful Stuff, services, contact topics, links | `src/data/content.js` |
+| Art gallery (titles, years, show/hide, order) | `src/data/art.js` |
 | Contact form (Netlify Forms) | `src/components/Contact.jsx` + hidden copy in `index.html` |
 | Colors, type, layout (Archivo, self-hosted) | `src/styles.css` |
 | Logo / spiral / favicon | `public/logo.png`, `public/spiral.png`, `public/favicon.png` (transparent, cut from the final logo) |
 | Project screenshots | `public/projects/<project-id>/` |
-| Art images | `public/art/` then set `src` in `content.js` |
+| Art images | `public/art/` — add `<slug>.jpg` + `<slug>-thumb.jpg`, then a line in `art.js` |
 
 ## Still to fill in (search for `TODO`)
 
 - Teachers Pay Teachers store URL (Vocabulary Bundles card)
-- Blog: add `href` + real `date` to each post as you publish it
+- Blog post on this site: save `src/posts/<slug>.md`, put images in `public/blog/<slug>/` (Markdown refers to them as `assets/<file>`), then add an entry in `content.js → posts` with `slug` and `href: '/blog/<slug>'`
+- Blog post hosted elsewhere: add an entry with the full `https://` link as `href` (no slug)
+- Tech News: sources update themselves; revisit the list now and then and bump `news.updated`
 - Useful Stuff: swap in referral links and set `affiliate: true` (the disclosure shows automatically)
 - Netlify → Forms → turn on email notifications for the contact form
 - Art images for the 9 slots
