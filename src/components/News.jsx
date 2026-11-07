@@ -12,6 +12,7 @@ export default function News() {
   return (
     <section id="news" className="section">
       <div className="wrap">
+        <p className="kicker" aria-hidden="true">~/cliff/tech-news</p>
         <h2 className="section-title">Tech news</h2>
         <p className="section-lead">
           Where I keep up with AI, vibe coding, digital drawing and the home lab. Every link goes

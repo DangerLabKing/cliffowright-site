@@ -6,6 +6,7 @@ export default function Blog() {
   return (
     <section id="blog" className="section">
       <div className="wrap narrow">
+        <p className="kicker" aria-hidden="true">~/cliff/blog</p>
         <h2 className="section-title">Blog</h2>
         <p className="section-lead">
           Write-ups of things I’ve built: home-lab automation, AI-assisted coding, and the

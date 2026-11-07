@@ -93,6 +93,7 @@ export default function Projects() {
   return (
     <section id="work" className="section">
       <div className="wrap">
+        <p className="kicker" aria-hidden="true">~/cliff/work</p>
         <h2 className="section-title">Work</h2>
         <p className="section-lead">
           Enterprise systems from my day job, products people use, things on the bench, and the

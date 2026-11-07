@@ -40,6 +40,7 @@ export default function Contact() {
   return (
     <section id="contact" className="section">
       <div className="wrap">
+        <p className="kicker" aria-hidden="true">~/cliff/contact</p>
         <h2 className="section-title">Work with me</h2>
         <p className="section-lead">
           Consulting, commissions, collaborations, or a good conversation about technology.

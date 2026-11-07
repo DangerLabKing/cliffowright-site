@@ -1,19 +1,30 @@
-import Logo from './Logo.jsx';
 import IdCard from './IdCard.jsx';
 import { site, now } from '../data/content.js';
 
-// Top of the page: logo + bio, then the "Now" box with the school ID beside it.
-// Bio text lives in src/data/content.js → site.bio (one string per paragraph).
+// Top of the page:
+//   row 1 → school ID (left) + bio (right)
+//   row 2 → the "Now" terminal, full width
+// Bio text: src/data/content.js → site.bio (one string per paragraph).
+// Now items: src/data/content.js → now.items.
+// The logo appears in the header only.
 export default function Hero() {
   const [lead, ...rest] = site.bio; // first paragraph is shown large
 
   return (
     <section id="top" className="hero">
+      {/* Page title for search engines and screen readers; not shown visually
+          because the logo in the header already says who this is. */}
+      <h1 className="visually-hidden">Cliff Wright: software developer, artist and tinkerer</h1>
+
       <div className="wrap hero-grid">
-        <h1 className="hero-logo">
-          <Logo />
-        </h1>
+        {/* School ID. No caption; its alt text (content.js → origin.alt) describes it. */}
+        <div className="started">
+          <IdCard />
+        </div>
+
         <div className="hero-bio">
+          {/* path label, matching "~/cliff/now" on the printout and the labels on every section */}
+          <p className="kicker" aria-hidden="true">~/cliff/about</p>
           <p className="hero-intro">{lead}</p>
           {rest.map((para) => (
             <p key={para} className="hero-more">{para}</p>
@@ -22,8 +33,7 @@ export default function Hero() {
       </div>
 
       <div className="wrap hero-notes">
-        {/* "Now" box, styled like a terminal window (styles: .now in styles.css).
-            Items and their order come from content.js → now.items. */}
+        {/* "Now" box, styled like a terminal window (styles: .now in styles.css). */}
         <div className="now">
           <div className="now-bar">
             <span className="now-dots" aria-hidden="true"><i /><i /><i /></span>
@@ -44,12 +54,6 @@ export default function Hero() {
           </ul>
           {/* blinking cursor on the last line, purely decorative */}
           <p className="now-cursor" aria-hidden="true"><span>$</span> <i /></p>
-        </div>
-
-        {/* School ID, top-aligned with the Now box. No heading or caption;
-            the image's alt text (in content.js → origin.alt) describes it. */}
-        <div className="started">
-          <IdCard />
         </div>
       </div>
 

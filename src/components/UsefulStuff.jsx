@@ -10,6 +10,7 @@ export default function UsefulStuff() {
   return (
     <section id="useful" className="section">
       <div className="wrap narrow">
+        <p className="kicker" aria-hidden="true">~/cliff/useful-stuff</p>
         <h2 className="section-title">Useful stuff</h2>
         <p className="section-lead">Tools, gear and resources I actually use.</p>
         {usefulStuff.length === 0 ? (

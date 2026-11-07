@@ -14,7 +14,13 @@
   --amber-wash: #fdf1d6;
   --pencil-deep: #c95f00;      /* readable orange for big headings (4:1 on paper) */
 
-  --font: 'Archivo Variable', 'Arial Narrow', system-ui, sans-serif;
+  /* Type system: three voices, each with one job (loaded in src/main.jsx) */
+  --font-head: 'Archivo Variable', 'Arial Narrow', system-ui, sans-serif;  /* headings, names */
+  --font-body: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;         /* reading text */
+  --font-mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;          /* labels, UI, data */
+  --printout: #fbfcf7;         /* tractor-feed paper */
+  --greenbar: #e6f0dd;         /* the green bands on it */
+  --perf: #b9b3a6;             /* perforation / punched-hole grey */
   --measure: 66ch;
   --gutter: clamp(16px, 4vw, 40px);
 }
@@ -24,10 +30,9 @@ html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adju
 body {
   margin: 0;
   color: var(--ink);
-  font-family: var(--font);
+  font-family: var(--font-body);
   font-size: 1.0625rem;
-  line-height: 1.55;
-  font-stretch: 100%;
+  line-height: 1.6;
   background-color: var(--paper);
   /* graph paper: sketchbook + engineering drawing */
   background-image:
@@ -48,6 +53,29 @@ button { font: inherit; color: inherit; }
 .skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: var(--paper); padding: 8px 14px; z-index: 100; }
 .skip:focus { left: 8px; }
 
+/* ---------- Type roles ----------
+   Headings and names → Archivo.  Labels, controls and data → Plex Mono.
+   Everything else inherits Plex Serif from <body>. */
+h1, h2, h3, h4,
+.section-title, .group-num, .group-title, .row-name, .log a, .log-title,
+.post-title, .post-body h2, .news-card h3, .useful-cat h3, .services dt,
+.art-label strong, .lightbox figcaption strong, .footer-line { font-family: var(--font-head); }
+
+.kicker, .nav a, .nav-toggle, .skip, .id-hint,
+.group-count, .row-meta, .row-year, .status, .stack span, .row-links a,
+.art-filters button, .art-label, .lightbox button,
+.log-when, .soon, .tags li, .post-back, .post-meta,
+.news-note, .news-updated, .disclosure,
+.contact-form label, .contact-form button, .form-ok, .form-err,
+.footer-links a, .footer-small { font-family: var(--font-mono); }
+
+/* "~/cliff/…" path label above each section title: the printout motif, site-wide */
+.kicker {
+  margin: 0 0 10px; font-size: 0.9rem; font-weight: 600; letter-spacing: .02em;
+  color: var(--pencil-deep);
+}
+.kicker::before { content: '$ '; color: var(--perf); }
+
 /* ---------- Header ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 30;
@@ -59,42 +87,36 @@ button { font: inherit; color: inherit; }
 .brand-logo { height: 46px; width: auto; }
 .nav { display: flex; gap: 6px; }
 .nav a {
-  font-weight: 600; text-decoration: none; padding: 6px 12px; border-radius: 4px;
+  font-size: 0.95rem; font-weight: 600; text-decoration: none; padding: 6px 12px; border-radius: 4px;
 }
 .nav a:hover { background: var(--amber); color: var(--ink); }
 .nav-toggle { display: none; background: var(--amber); border: 2px solid var(--ink); border-radius: 4px; padding: 6px 14px; font-weight: 700; cursor: pointer; }
 
 /* ---------- Hero ---------- */
 .hero { padding: clamp(40px, 8vw, 96px) 0 0; }
-.hero-grid {
+.hero-grid {                  /* top row: school ID (left) + bio (right) */
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: clamp(32px, 6vw, 80px);
-  align-items: center;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
 }
-.hero-logo { margin: 0; }
-.hero-logo img { width: 100%; }
 .hero-bio { max-width: var(--measure); }
 .hero-intro {                 /* bio paragraph 1, shown large */
-  font-size: clamp(1.25rem, 2.1vw, 1.55rem);
-  line-height: 1.42;
-  font-weight: 450;
+  font-size: clamp(1.25rem, 2.1vw, 1.5rem);
+  line-height: 1.45;
+  font-weight: 500;
   margin: 0;
 }
 .hero-more {                  /* bio paragraphs 2+, normal size */
   margin: 16px 0 0;
-  font-size: 1.08rem;
-  color: var(--graphite);
+  font-size: 1.06rem;
+  color: #3d3a36;
 }
 
-.hero-notes {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  gap: clamp(28px, 5vw, 64px);
-  align-items: start;
-  margin-top: clamp(36px, 6vw, 64px);
+.hero-notes {                 /* second row: the Now terminal, full width */
+  margin-top: clamp(40px, 6vw, 72px);
 }
-.started { margin: 0; padding-top: 4px; }   /* ID card's top lines up with the Now box */
+.started { margin: 0; padding-top: 18px; }   /* room for the "Hover or tap me" tag above the card */
 /* The ID card + doodle disguise (hover, focus or tap) */
 .id-card {
   position: relative; display: block; width: 100%; max-width: 460px;
@@ -139,50 +161,52 @@ button { font: inherit; color: inherit; }
   transform: rotate(4deg);
 }
 
-/* "Now" box: a terminal window in the site's palette.
-   Dark ink background, amber project names, monospace type. */
+/* "Now" box: a 1980s green-bar dot-matrix printout (tractor-feed paper).
+   Each entry is one band; bands alternate white / green. The punched-hole
+   strips down both edges are the ::before / ::after layers. */
 .now {
-  --mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Code', Consolas, monospace;
-  font-family: var(--mono);
-  background: #141210;                 /* warm near-black, like soft graphite */
-  color: #e9e3d6;
-  border: 2px solid var(--ink);
-  border-radius: 8px;
-  box-shadow: 6px 6px 0 var(--amber);
-  overflow: hidden;
+  position: relative;
+  font-family: var(--font-mono);
+  color: #1d1b18;
+  background: var(--printout);
+  padding: 0 46px;                       /* room for the hole strips */
+  box-shadow: 0 2px 0 #d9d4c6, 6px 8px 0 rgba(242, 176, 51, .55);
 }
-/* title bar with the three window dots */
-.now-bar {
-  display: flex; align-items: center; gap: 12px;
-  padding: 9px 14px;
-  background: #2a2622; border-bottom: 2px solid var(--ink);
+.now::before, .now::after {               /* punched tractor-feed holes */
+  content: ''; position: absolute; top: 0; bottom: 0; width: 30px;
+  background:
+    radial-gradient(circle at 15px 15px, var(--paper) 6px, var(--perf) 6.5px, transparent 7.5px) 0 0 / 30px 30px repeat-y,
+    #f4f1e8;
+  border: 0 dashed #d6d0c2;
 }
-.now-dots { display: inline-flex; gap: 6px; }
-.now-dots i { width: 11px; height: 11px; border-radius: 50%; display: block; }
-.now-dots i:nth-child(1) { background: var(--eraser); }
-.now-dots i:nth-child(2) { background: var(--amber); }
-.now-dots i:nth-child(3) { background: #7fb069; }
-.now-bar h2 { margin: 0; font-size: 0.92rem; font-weight: 600; color: #e9e3d6; letter-spacing: .02em; }
-.now-updated { margin-left: auto; font-size: 0.78rem; color: #a59d90; }
+.now::before { left: 0; border-right-width: 1.5px; }
+.now::after { right: 0; border-left-width: 1.5px; }
 
-.now ul { margin: 0; padding: 12px 18px 0; list-style: none; }
+.now-bar {                                /* header line, with a tear-off rule under it */
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  padding: 14px 16px; border-bottom: 2px dashed var(--perf);
+}
+.now-dots { display: none; }              /* window dots belonged to the old terminal look */
+.now-bar h2 { margin: 0; font-family: var(--font-mono); font-size: 1rem; font-weight: 700; color: #1d1b18; letter-spacing: .02em; }
+.now-updated { margin-left: auto; font-size: 0.82rem; color: #6b665d; }
+
+.now ul { margin: 0; padding: 0; list-style: none; }
 .now li {
   display: grid; grid-template-columns: 16px 1fr; gap: 8px;
-  padding: 8px 0; border-bottom: 1px dashed #3b3631;
-  font-size: 0.9rem; line-height: 1.5;
+  padding: 12px 16px; font-size: 1rem; line-height: 1.55;
 }
-.now-prompt { color: var(--pencil); font-weight: 700; }
-.now li strong { color: var(--amber); font-weight: 700; }
-.now-state { margin-left: 8px; font-size: 0.78rem; font-weight: 600; }
-.now-live { color: #8fd18a; }          /* green = shipped */
-.now-dev { color: #f2b56b; }           /* orange = in progress */
-.now-text { display: block; color: #cfc8bb; }
+.now li:nth-child(odd) { background: var(--greenbar); }   /* the green bars */
+.now-prompt { color: var(--pencil-deep); font-weight: 700; }
+.now li strong { color: #1d1b18; font-weight: 700; }
+.now-state { margin-left: 8px; font-size: 0.8rem; font-weight: 600; }
+.now-live { color: #2f7d32; }            /* green = shipped */
+.now-dev { color: var(--pencil-deep); }  /* orange = in progress */
+.now-text { display: block; color: #3d3a36; }
 
-/* blinking cursor line */
-.now-cursor { margin: 0; padding: 10px 18px 14px; font-size: 0.9rem; color: var(--pencil); font-weight: 700; }
-.now-cursor i {
+.now-cursor { margin: 0; padding: 12px 16px 18px; font-size: 1rem; color: var(--pencil-deep); font-weight: 700; }
+.now-cursor i {                           /* blinking print head */
   display: inline-block; width: 9px; height: 1.05em; vertical-align: -0.15em;
-  background: #e9e3d6; animation: blink 1.1s steps(1) infinite;
+  background: #1d1b18; animation: blink 1.1s steps(1) infinite;
 }
 @keyframes blink { 50% { opacity: 0; } }
 
@@ -399,16 +423,21 @@ button { font: inherit; color: inherit; }
 .post-body figcaption { margin-top: 14px; font-size: 0.95rem; color: var(--graphite); font-style: italic; }
 /* inline code: small amber-washed chip */
 .post-body :not(pre) > code {
-  font-family: 'JetBrains Mono Variable', ui-monospace, monospace; font-size: .88em;
+  font-family: var(--font-mono); font-size: .88em;
   background: var(--amber-wash); padding: 1px 6px; border-radius: 3px;
 }
-/* code blocks: the same terminal look as the Now box */
+/* code blocks: green-bar printout, like the Now box. Each band is 2 lines tall
+   and starts right after the top padding (background-position), so bands line up with the text. */
 .post-body pre {
-  margin: 1.4em 0 1.6em; padding: 18px 20px; overflow-x: auto;
-  background: #141210; color: #e9e3d6;
-  border: 2px solid var(--ink); border-radius: 8px; box-shadow: 6px 6px 0 var(--amber);
-  font-family: 'JetBrains Mono Variable', ui-monospace, monospace; font-size: 0.88rem; line-height: 1.6;
-  font-variant-ligatures: none;   /* show <= as typed, not as a ≤ symbol, so code reads exactly as copied */
+  margin: 1.4em 0 1.6em; padding: 1.6em 22px; overflow-x: auto;
+  font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.6;
+  font-variant-ligatures: none;   /* show <= as typed, not as a ≤ symbol */
+  color: #1d1b18;
+  background: repeating-linear-gradient(var(--printout) 0 3.2em, var(--greenbar) 3.2em 6.4em);
+  background-attachment: local;   /* bands scroll with wide code */
+  background-position: 0 1.6em;   /* = the top padding */
+  border-left: 6px dashed var(--perf);
+  box-shadow: 0 2px 0 #d9d4c6, 6px 8px 0 rgba(242, 176, 51, .55);
 }
 .post-body pre code { font-family: inherit; }
 
@@ -433,7 +462,8 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Useful stuff ---------- */
 .useful-cat { margin-bottom: 32px; }
-.useful-cat h3 { margin: 0 0 8px; font-size: 1.3rem; font-weight: 800; }
+/* same orange condensed heading as the WORK groups and Tech News cards */
+.useful-cat h3 { margin: 0 0 8px; font-size: clamp(1.4rem, 2.6vw, 1.8rem); font-weight: 850; font-stretch: 62%; line-height: 1; text-transform: uppercase; color: var(--pencil-deep); }
 .useful-cat dl { margin: 0; border-top: 3px solid var(--ink); }
 .useful-cat dl > div { display: grid; grid-template-columns: minmax(160px, 0.8fr) 2fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--ink); }
 .useful-cat dt { font-weight: 700; }
@@ -484,18 +514,21 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Small screens ---------- */
 @media (max-width: 860px) {
-  .hero-grid, .hero-notes, .contact-grid { grid-template-columns: 1fr; }
-  .hero-logo { max-width: 560px; }
+  .hero-grid, .contact-grid { grid-template-columns: 1fr; }
+  .hero-grid .started { max-width: 460px; }
   .row summary { grid-template-columns: 1fr 28px; gap: 6px 12px; }
   .row-name { grid-column: 1; }
   .row-toggle { grid-column: 2; grid-row: 1; }
   .row-tagline, .row-meta { grid-column: 1 / -1; }
   .row-body.has-media { grid-template-columns: 1fr; }
   .news-grid { grid-template-columns: 1fr; }
-  .started { padding-top: 20px; }   /* room for the "Hover or tap me" tag when stacked */
   .group-count { margin-left: 0; }
 }
 @media (max-width: 680px) {
+  .now { padding: 0 24px; }
+  .now::before, .now::after { width: 18px; background-size: 18px 22px, auto;
+    background-image: radial-gradient(circle at 9px 11px, var(--paper) 4px, var(--perf) 4.5px, transparent 5.5px); }
+  .now li, .now-bar, .now-cursor { padding-left: 10px; padding-right: 10px; }
   .nav-toggle { display: block; }
   .nav {
     display: none; position: absolute; top: 68px; left: 0; right: 0;

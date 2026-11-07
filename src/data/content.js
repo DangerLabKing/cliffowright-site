@@ -7,9 +7,9 @@ export const site = {
   // Bio shown in the hero, one string per paragraph.
   // The FIRST paragraph is shown large; the rest in normal-size text.
   bio: [
-    'I’m Cliff Wright, a Jamaican-born software developer, artist, and tinkerer. For more than 30 years, I’ve built and maintained software for a major regional transit agency, the tools behind the people who keep the trains running.',
-    'On my own time, I build things I’d want to use myself. LiveGlossaryPro is a free tool that turns any vocabulary list into flashcards, quizzes, and puzzles. I’m also building Consist Commander, a rail-yard game, and my home lab puts together a morning news digest, transit alerts included, for my commute.',
-    'Lately I’ve been more deliberate about how I build with AI. I write down what the code needs to do, use AI to help me work through the problem, then review and test every change myself. When I draw, I move between pencil and paper and digital tools like Procreate and Sketchbook.',
+    'I’m Cliff Wright, a software developer, artist, and tinkerer. For more than 30 years, I’ve built and maintained software that helps keep a major city’s subway system safe for the riders who travel it every day.',
+    'On my own time, I build things to practice new development skills and try out new technology. For teachers, I made LiveGlossaryPro, a free tool that turns any vocabulary list into flashcards, quizzes, and puzzles. I’m also building Consist Commander, a rail-yard game. And in my home lab, I’ve put together a workflow that emails me a morning news digest, transit alerts included, as I head out the door.',
+    'Lately I’ve been exploring how AI can help with software development. I start by writing the requirements, then work through the user interface with pen and pencil, Photoshop, and AI, and use AI to help write the code. I review and test every change myself.',
   ],
   links: [
     { label: 'Instagram', href: 'https://instagram.com/draw_wright_ai' },

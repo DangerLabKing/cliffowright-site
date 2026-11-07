@@ -74,6 +74,7 @@ export default function Art() {
   return (
     <section id="art" className="section section-art">
       <div className="wrap">
+        <p className="kicker" aria-hidden="true">~/cliff/art</p>
         <h2 className="section-title">Art</h2>
         <p className="section-lead">
           Sketches, comics and digital pieces going back to 2007. I move between pencil and paper

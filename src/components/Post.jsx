@@ -56,6 +56,7 @@ export default function Post({ slug }) {
       <article className="wrap narrow">
         <p className="post-back"><a href="/#blog">← All posts</a></p>
         <header className="post-head">
+          <p className="kicker" aria-hidden="true">~/cliff/blog/{slug}</p>
           <h1 className="post-title">{meta.title}</h1>
           <p className="post-meta">
             By Cliff Wright · {meta.date}
